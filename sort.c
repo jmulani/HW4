@@ -5,6 +5,9 @@
 
 #include "sort.h"
 
+void my_sort(int *numbers, unsigned count);
+int cmp (const void * a, const void * b);
+
 __attribute__ ((weak))
 int compare(int a, int b) {
 	    return a - b;
@@ -57,5 +60,17 @@ void insertion_sort(int *numbers, unsigned count) {
 	memcpy(numbers, new, count*sizeof(int));
 }
 
-sorting_fn sorting_fns[] = {bubble_sort, insertion_sort, NULL};
+void my_sort(int *numbers, unsigned count){
+
+	qsort(numbers, count, sizeof(int), cmp);
+
+}
+
+
+int cmp (const void * a, const void * b){
+	return compare(*(int*)a, *(int*)b);
+}
+
+
+sorting_fn sorting_fns[] = {bubble_sort, insertion_sort, my_sort, NULL};
 
